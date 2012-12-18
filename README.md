@@ -1,3 +1,7 @@
+DO NOT USE THIS FORK FOR GENERAL PROXY USE!!!!!
+This fork just has a couple modifications for use as a submodule of the main stratum mining server.
+It actually disables the stratum proxy, so, don't use it.
+
 stratum-mining-proxy
 ====================
 
