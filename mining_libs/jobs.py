@@ -11,6 +11,8 @@ import utils
 import stratum.logger
 log = stratum.logger.get_logger('proxy')
 
+import medcoin_hybrid
+
 try:
     from midstatec.midstatec import test as midstateTest, midstate as calculateMidstate
     if not midstateTest():
@@ -221,7 +223,11 @@ class JobRegistry(object):
         # 1. Check if blockheader meets requested difficulty
         header_bin = binascii.unhexlify(header[:160])
         rev = ''.join([ header_bin[i*4:i*4+4][::-1] for i in range(0, 20) ])
-        hash_bin = utils.doublesha(rev)
+        
+        
+        #hash_bin = utils.doublesha(rev)
+        hash_bin = medcoin_hybrid.getPoWHash(rev)
+        
         block_hash = ''.join([ hash_bin[i*4:i*4+4][::-1] for i in range(0, 8) ])
         
         #log.info('!!! %s' % header[:160])
@@ -230,6 +236,8 @@ class JobRegistry(object):
         if utils.uint256_from_str(hash_bin) > self.target:
             log.debug("Share is below expected target")
             return True
+        else:
+            log.debug("target OK!")            
         
         # 2. Lookup for job and extranonce used for creating given block header
         try:
