@@ -210,9 +210,9 @@ class JobRegistry(object):
         else:
             result['target'] = self.target1_hex
     
-        if calculateMidstate and not (no_midstate or self.no_midstate):
-            # Midstate module not found or disabled
-            result['midstate'] = binascii.hexlify(calculateMidstate(header_bin))
+        #if calculateMidstate and not (no_midstate or self.no_midstate):
+            ## Midstate module not found or disabled
+            #result['midstate'] = binascii.hexlify(calculateMidstate(header_bin))
             
         return result            
         
